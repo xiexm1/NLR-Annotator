@@ -79,11 +79,9 @@ public class MotifParserParallelExecutor {
 		this.fragmentLength = fragmentLength;
 		this.overlap = overlap;
 		
-		this.tempdir = new File( "temp_mast1" );
-		while(tempdir.exists()){
-			tempdir = new File("temp_mast" + ((int) Math.round( Math.random() *100000000  )));
-		}
-		tempdir.mkdir();
+		do {
+			this.tempdir = new File("temp_mast" + System.nanoTime() + "_" + Thread.currentThread().getId());
+		} while (!tempdir.mkdir());
 		
 		
 		System.err.println("DEBUG: Temporary directory is "+tempdir.getAbsolutePath() );
